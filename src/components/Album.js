@@ -15,7 +15,8 @@ class Album extends Component {
       currentSong: album.songs[0],
       currentTime: 0,
       duration: album.songs[0].duration,
-      isPlaying: false
+      isPlaying: false,
+      volume: .10,
     };
 
     this.audioElement = document.createElement('audio');
@@ -90,6 +91,20 @@ class Album extends Component {
       this.setState({currentTime: newTime});
     }
 
+    handleVolumeChange(e) {
+      const newVolume = this.audioElement.volume * e.target.value;
+      this.audioElement.volume = newVolume;
+      this.setState({volume : newVolume})
+    }
+
+    formatTime(time){
+      const timeMinutes = Math.floor(time / 60);
+      const timeSeconds = Math.floor(time - timeMinutes * 60);
+      const prettyTime = timeMinutes + ":" + timeSeconds
+      return prettyTime;
+
+    }
+
 
   render(){
     return (
@@ -120,7 +135,7 @@ class Album extends Component {
               </button>
               </td>
               <td className="song-title"> {songs.title} </td>
-              <td className="song-duration"> {songs.duration}</td>
+              <td className="song-duration"> {this.formatTime(songs.duration)}</td>
             </tr>
           )
         }
@@ -129,12 +144,14 @@ class Album extends Component {
         <PlayerBar
           isPlaying={this.state.isPlaying}
           currentSong={this.state.currentSong}
-          currentTime={this.audioElement.currentTime}
-          duration={this.audioElement.duration}
+          currentTime={this.formatTime(this.audioElement.currentTime)}
+          volume={this.audioElement.volume}
+          duration={this.formatTime(this.audioElement.duration)}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
           handleNextClick={() => this.handleNextClick()}
           handleTimeChange={(e) => this.handleTimeChange(e)}
+          handleVolumeChange={(e) => this.handleVolumeChange(e)}
 
           />
 

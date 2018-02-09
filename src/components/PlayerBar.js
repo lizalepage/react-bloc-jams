@@ -20,7 +20,7 @@ class PlayerBar extends Component {
           <input
             type="range"
             className="seek-bar"
-              value={(this.props.currentTime / this.props.duration) || 0}
+              value={this.props.timeLapsed || 0 }
               max="1"
               min="0"
               step="0.01"
@@ -36,7 +36,7 @@ class PlayerBar extends Component {
                 className="seek-bar"
                 max="1"
                 min="0"
-                step="0.01"
+                step="0.001"
                 value= {this.props.volume}
                 onChange={this.props.handleVolumeChange}
               />

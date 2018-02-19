@@ -5,21 +5,21 @@ class PlayerBar extends Component {
     return(
       <section className="player-bar">
         <section id="buttons">
-          <button id="previous" onClick={this.props.handlePrevClick}>
+          <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick={this.props.handlePrevClick}>
             <span className="ion-skip-backward"></span>
           </button>
-          <button id="play-pause" onClick={this.props.handleSongClick}>
+          <button className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onClick={this.props.handleSongClick}>
             <span className={this.props.isPlaying ? 'ion-pause' : 'ion-play'}></span>
           </button>
-          <button id="next" onClick={this.props.handleNextClick}>
+          <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick={this.props.handleNextClick}>
             <span className="ion-skip-forward"></span>
           </button>
         </section>
         <section id="time-control">
           <div className="current-time">{this.props.currentTime}</div>
           <input
-            type="range"
-            className="seek-bar"
+              type="range"
+              className="mdl-slider mdl-js-slider"
               value={this.props.timeLapsed || 0 }
               max="1"
               min="0"
@@ -33,11 +33,11 @@ class PlayerBar extends Component {
             <div className="icon ion-volume-low"></div>
               <input
                 type="range"
-                className="seek-bar"
+                className="mdl-slider mdl-js-slider"
+                value= {this.props.volume}
                 max="1"
                 min="0"
-                step="0.001"
-                value= {this.props.volume}
+                step="0.01"
                 onChange={this.props.handleVolumeChange}
               />
             <div className="icon ion-volume-high"></div>

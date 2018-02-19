@@ -16,7 +16,7 @@ class Album extends Component {
       currentTime: 0,
       duration: album.songs[0].duration,
       isPlaying: false,
-      volume: 80,
+      volume: .50,
     };
 
     this.audioElement = document.createElement('audio');
@@ -38,8 +38,8 @@ class Album extends Component {
 
     componentWillUnmount() {
       this.audioElement.src = null;
-      this.audioElement.removeEventListeners('timeupdate', this.eventListners.timeupdate);
-      this.audioElement.removeEventListeners('durationchange', this.eventListners.durationchage);
+      this.audioElement.removeEventListener('timeupdate', this.eventListeners.timeupdate);
+      this.audioElement.removeEventListener('durationchange', this.eventListeners.durationchage);
     }
 
     play() {
@@ -118,21 +118,22 @@ class Album extends Component {
             <div id="release-info">{this.state.album.releaseInfo}</div>
           </div>
         </section>
-        <table id="song-list">
-          <colgroup>
-            <col id="song-number-column" />
-            <col id="song-title-column" />
-            <col id="song-duration-column" />
-          </colgroup>
+        <table id="song-list" className="mdl-data-table mdl-js-data-table">
+          <thead>
+            <tr>
+              <th className="mdl-data-table__cell--non-numeric" id="song-number-column"> </th>
+              <th id="song-title-column"> Song </th>
+              <th id="song-duration-column"> Time </th>
+            </tr>
+          </thead>
           <tbody>
             {
               this.state.album.songs.map( (songs, index) =>
             <tr className="song" key={index} onClick={() => this.handleSongClick(songs)}>
-              <td className ="song-actions">
-                <button>
-                  <span className="song-number"> {index + 1} </span>
-                  <span className='ion-play'></span>
-                  <span className="ion-pause"></span>
+              <td className ="mdl-data-table__cell--non-numeric">
+                <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                  <i class="material-icons"> {index + 1} </i>
+
               </button>
               </td>
               <td className="song-title"> {songs.title} </td>

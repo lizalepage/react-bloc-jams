@@ -8,14 +8,15 @@ import Album from './components/Album';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header>
-          <nav>
-            <Link to='/'>Landing</Link>
-            <Link to='library'>Library</Link>
+      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+        <header className="mdl-layout__header">
+          <img className="bloc_logo" src="./assets/images/bloc_jams_logo.png" alt="bloc jams logo"/>
+          <nav className="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <Link to='/' className="mdl-layout__tab is-active">Landing</Link>
+            <Link to='/library' className="mdl-layout__tab">Library!</Link>
           </nav>
-          <h1>Bloc Jams</h1>
         </header>
+
         <main>
           <Route exact path="/" component={Landing} />
           <Route path="/library" component={Library} />

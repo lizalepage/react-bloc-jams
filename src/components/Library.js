@@ -9,20 +9,41 @@ class Library extends Component {
   }
   render() {
     return(
-      <section className='library'>
+      <div className='library'>
+        <div class="mdl-grid">
+
+
+
+
         {
+
           this.state.albums.map( (album, index) =>
+            <div className='mdl-cell mdl-cell--6-col'>
             <Link to={`/album/${album.slug}`} key={index} >
-              <img src={album.albumCover} alt={album.title}/>
-              <div>{album.title}</div>
-              <div>{album.artist}</div>
-              <div>{album.songs.length} songs </div>
+             <img src={album.albumCover} alt={album.title}/>
+                <div className="info"> Album: {album.title}</div>
+                <div className="info">Artist: {album.artist}</div>
+                <div className="info">Songs: {album.songs.length}</div>
+
+
+
             </Link>
-        )
-        }
-      </section>
+            </div>
+          )
+
+        };
+          </div>
+          </div>
+
+
+
+
+
+
+
     );
-  }
+
+}
 }
 
 export default Library;

@@ -29,7 +29,7 @@ class PlayerBar extends Component {
           <div className="total-time">{this.props.duration}</div>
         </section>
         <section id="volume-control">
-          <div id="volume-control">
+          <div id="volume-control" width="100px">
             <div className="icon ion-volume-low"></div>
               <input
                 type="range"
@@ -40,7 +40,6 @@ class PlayerBar extends Component {
                 step="0.01"
                 onChange={this.props.handleVolumeChange}
               />
-            <div className="icon ion-volume-high"></div>
           </div>
         </section>
       </section>

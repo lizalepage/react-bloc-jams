@@ -84,11 +84,12 @@ img.bloc_logo {
 }
 
 .player-bar{
-  background: hsla(0, 0%, 0%, 0.1);
+  background: hsla(0, 0%, 0%, 0.3);
   bottom: 0;
   height: 100px;
   position: fixed;
   width: 100%;
+  display: block;
 
 }
 
@@ -97,7 +98,8 @@ img.bloc_logo {
 #time-control {
   margin: 4.5rem auto;
   /* max-width: 640px; */
-  width: 50%;
+  width: 40%;
+ text-align: center;
 }
 
 #time-control .current-time{
@@ -106,9 +108,9 @@ img.bloc_logo {
 
 #time-control .total-time{
   float: right;
+  display: inline;
+  transform: translate(20px, -18px)
 }
-
-
 
 
 #buttons {
@@ -119,16 +121,7 @@ img.bloc_logo {
   margin: 0 auto;
   width: 300px;
   text-align: center;
-
-
 }
-
-.mdl-button{
-  margin-left: 5px;
-  margin-right: 5px;
-
-}
-
 
 #volume-control{
   bottom: 0px;
@@ -138,11 +131,12 @@ img.bloc_logo {
   right: 2rem;
   width: 15%;
   color: hsla(0, 0%, 100%, 0.4);
-
+  display: inline;
 }
 
-#volume-control .icon ion-volume-low{
-  float: left;
+#volume-control .icon {
+  float: right;
+  display: inline;
 }
 
 .mdl-slider {
@@ -184,14 +178,20 @@ h2.artist {
 }
 
 #song-list{
-  color: #000;
-  width: 80%;
-  font-size: 1em;
-  padding-left: 2rem;
+  font-weight: 100;
+  height: 20%;
+  width: 70%;
+  display: block;
   margin: auto;
+  margin-bottom: 100px;
   background: #ffd1d1;
   opacity: .7;
+  padding: 20px 20px 20px 20px;
+  text-align: left;
 }
+
+
+
 
 .album-info{
   padding: 0 1rem;
@@ -200,4 +200,8 @@ h2.artist {
   max-width: 800px;
   box-sizing: border-box;
 
+}
+
+.mdl-button{
+  margin-left: 20px;
 }

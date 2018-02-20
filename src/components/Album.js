@@ -21,6 +21,8 @@ class Album extends Component {
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
+    this.handleHoverOn = this.handleHoverOn.bind(this);
+    this.handleHoverOff = this.handleHoverOff.bind(this);
   }
 
     componentDidMount () {
@@ -34,12 +36,13 @@ class Album extends Component {
       };
       this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
       this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
+
     }
 
     componentWillUnmount() {
       this.audioElement.src = null;
       this.audioElement.removeEventListener('timeupdate', this.eventListeners.timeupdate);
-      this.audioElement.removeEventListener('durationchange', this.eventListeners.durationchage);
+      this.audioElement.removeEventListener('durationchange', this.eventListeners.durationchange);
     }
 
     play() {
@@ -106,6 +109,58 @@ class Album extends Component {
 
     }
 
+    songClass(songs, index){
+        if(songs === this.state.currentSong){
+          if(this.state.isPlaying){
+            return 'ion-pause';
+            }
+          else if (!this.state.isPlaying){
+            return 'ion-play';
+          }
+        }
+          else if (this.state.album.songs[index].hover){
+            return 'ion-play';
+          }
+
+
+    }
+
+    songNumber(songs, index){
+      const theSong = index + 1;
+        if(songs === this.state.currentSong || this.state.album.songs[index].hover){
+          return
+          }
+        else{
+          return theSong;
+      }
+    }
+
+    handleHoverOn(index) {
+      const temp = this.state.album.songs;
+      temp[index].hover = true;
+      this.setState(temp);
+    }
+
+    handleHoverOff(index) {
+      const temp = this.state.album.songs;
+      temp[index].hover = false;
+      this.setState(temp);
+}
+
+    hoverEffect(index) {
+      if (this.state.album.songs[index].hover) {
+        return 'ion-play'
+      }
+    }
+
+
+
+
+
+
+
+
+
 
   render(){
     return (
@@ -121,23 +176,25 @@ class Album extends Component {
         <table id="song-list" className="mdl-data-table mdl-js-data-table">
           <thead>
             <tr>
-              <th className="mdl-data-table__cell--non-numeric" id="song-number-column"> </th>
-              <th id="song-title-column"> Song </th>
-              <th id="song-duration-column"> Time </th>
+              <th className="mdl-data-table__cell--non-numeric" width="10%" id="song-number-column"> </th>
+              <th className="mdl-data-table__cell--non-numeric" width="40%" id="song-title-column"> Song </th>
+              <th className="mdl-data-table__cell--non-numeric" width="50%" id="song-duration-column"> Time </th>
             </tr>
           </thead>
           <tbody>
             {
               this.state.album.songs.map( (songs, index) =>
-            <tr className="song" key={index} onClick={() => this.handleSongClick(songs)}>
+            <tr className="song" onMouseEnter={() => this.handleHoverOn(index)} onMouseLeave={() => this.handleHoverOff(index)} key={index} onClick={() => this.handleSongClick(songs)}>
               <td className ="mdl-data-table__cell--non-numeric">
                 <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
-                  <i class="material-icons"> {index + 1} </i>
+                    <i className={this.songClass(songs, index)}>
+                    {this.songNumber(songs, index)}
+                    </i>
 
-              </button>
+                </button>
               </td>
-              <td className="song-title"> {songs.title} </td>
-              <td className="song-duration"> {this.formatTime(songs.duration)}</td>
+              <td className="mdl-data-table__cell--non-numeric song-title"> {songs.title} </td>
+              <td className="mdl-data-table__cell--non-numeric song-duration"> {this.formatTime(songs.duration)}</td>
             </tr>
           )
         }
